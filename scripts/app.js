@@ -9,7 +9,7 @@
 // Set turn to Player 1 and register event handler for draw button -- draw will reveal the card with a random color
 
 // Variables (Game State/Model)
-
+const board = $(".board");
 
 // Initialization Functions
 

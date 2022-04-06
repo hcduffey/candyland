@@ -8,7 +8,31 @@
 // Ensure no card is drawn (e.g. hide the card)
 // Set turn to Player 1 and register event handler for draw button -- draw will reveal the card with a random color
 
-// VARIABLES (Game State/Model)
+// GAME STATE/MODEL
+
+class Player {
+    constructor(rowLength) {
+        this.directions = {
+            up: -1 * (rowLength), // the length of a row in the board determines how many elements to move to go up a row
+            left: -1,
+            right: 1
+        }
+
+        this.currentDirection = this.directions.up;
+        this.currentLocation = 121;
+    }
+
+    // based on the given board state, it updates the current direction the player should move
+    // this should be invoked before every move
+    checkMoveDirection(boardState) {
+
+    }
+
+    // based on the given board state, the players locaton is updated based on the direction its going
+    movePlayer(boardState) {
+
+    }
+}
 
 // stores the allowed colors for the board squares and cards
 const color = {
@@ -22,6 +46,8 @@ const color = {
 
 const rowLength = 15;
 const board = $(".board");
+
+const player1 = new Player(rowLength);
 
 // INITIALIZATION FUNCTIONS
 

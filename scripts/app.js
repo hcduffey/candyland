@@ -9,11 +9,38 @@
 // Set turn to Player 1 and register event handler for draw button -- draw will reveal the card with a random color
 
 // Variables (Game State/Model)
+
+// allowed colors for the board squares and cards
+const color = {
+    red: "w3-red", 
+    purple: "w3-purple", 
+    blue: "w3-blue", 
+    yellow: "w3-yellow", 
+    empty: ""
+};
+
+const boardState = Array(135).fill(color.yellow);
+const rowLength = 15;
+
 const board = $(".board");
 
 // Initialization Functions
+function initializeBoard() {
+    let boardTableString = "<tr>";
 
+    boardState.forEach( (boardSquare, index) => {
 
+        boardTableString += `<td><div id="${index}" class="w3-panel ${boardSquare}">${index}</div></td>`;
+        if(((index+1) % 15 === 0) && (index !== 0)) {
+            boardTableString += "</tr><tr>";
+        }
+    
+    });
+
+    board.html(boardTableString);
+}  
+
+initializeBoard();
 
 // Controller Functions
 

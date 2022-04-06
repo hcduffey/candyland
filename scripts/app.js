@@ -11,12 +11,14 @@
 // GAME STATE/MODEL
 
 class Player {
-    constructor(rowLength) {
+    constructor(rowLength, token) {
         this.directions = {
             up: -1 * (rowLength), // the length of a row in the board determines how many elements to move to go up a row
             left: -1,
             right: 1
         }
+
+        this.token = token;
 
         this.currentDirection = this.directions.up;
         this.currentLocation = 121;
@@ -34,7 +36,7 @@ class Player {
     }
 }
 
-// stores the allowed colors for the board squares and cards
+// stores the allowed colors for the board squares and cards, color definitions are classes in the W3 CSS styles
 const color = {
     green: "w3-green", 
     purple: "w3-purple", 
@@ -47,7 +49,7 @@ const color = {
 const rowLength = 15;
 const board = $(".board");
 
-const player1 = new Player(rowLength);
+const player1 = new Player(rowLength, "./images/player1_token.png");
 
 // INITIALIZATION FUNCTIONS
 
@@ -104,17 +106,26 @@ function initializeBoardState() {
 }
 
 /**
- * creates the html table that will represent the game board based on the board state
+ * creates the html table that will represent the game board based on the board state and player locations
  */
-function drawBoard(boardStateInput) {
+function drawBoard(boardStateInput, player) {
     let boardTableString = "<tr>";
-
-    boardStateInput.forEach( (boardSquare, index) => {
+    
+    boardStateInput.forEach( (boardSquareColor, index) => {
         let printChar = "";
-        if(boardSquare !== "") {
+        let tokenHTML = "";
+        
+        if(boardSquareColor !== "") {
             printChar = index;
         }
-        boardTableString += `<td><div id="${index}" class="w3-panel ${boardSquare}">${printChar}</div></td>`;
+        
+        if(player.currentLocation === index) {
+            console.log(player.currentLocation + " : " + index);
+            tokenHTML = `<img class="token" src="${player.token}">`;
+            console.log(tokenHTML);
+        }
+
+        boardTableString += `<td><div id="${index}" class="w3-panel ${boardSquareColor}">${tokenHTML}</div></td>`;
         
         if(((index+1) % 15 === 0) && (index !== 0)) {
             boardTableString += "</tr><tr>";
@@ -127,7 +138,7 @@ function drawBoard(boardStateInput) {
 }  
 
 const boardState = initializeBoardState();
-drawBoard(boardState);
+drawBoard(boardState, player1);
 
 // Controller Functions
 

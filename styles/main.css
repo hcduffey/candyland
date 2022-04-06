@@ -26,3 +26,11 @@ td {
     text-align: center;
 }
 
+/* Styles for player tokens */
+
+.token {
+    z-index: 2;
+    height: 60px;
+    width: 60px;
+}
+

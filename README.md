@@ -13,20 +13,21 @@ _Main Screen_
 
 1. As a user, I want to be able to start a new game at any time.
 
-2. As a user, I play a turn by:
+2. As a user, I want to play a turn by drawing a card and moving my game piece to the next corresponding color square.
 
-* Clicking the Draw button to draw a card
-* Clicking the correct square based on the drawn cards color.
+3. As a user, I want my opponent to play a turn after me.
 
-3. As a user, I want to see a celebratory message when I win the game by reaching the final square.
+4. As a user, I want to see a celebratory message when I win the game by reaching the final square.
 
 ### MVP Goals
 
-1. As a user I want to play a turn by clicking a Draw button to have my game piece moved to the corresponing color square on the card.
+1. As a user, I want start a new game by clicking a New button. This will bring all player pieces back to Start.
 
-2. As a user, I want to play against a friend in 2 player mode.
+2. As a user, I want to play a turn by clicking a Draw button to have my game piece moved to the corresponing color square on the card.
 
-3. As a user I want to win the game by landing on the Star Square at the end of the board (which will be reached by any color).
+3. As a user, I want to play against a friend in 2 player mode.
+
+4. As a user I want to win the game by landing on the Star Square at the end of the board (which will be reached by any color).
 
 ### Stretch Goals
 

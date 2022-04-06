@@ -1,8 +1,24 @@
 // 1. Initialize the game and board
-// Create array of Square records that stores the state of each square on the gameboard
+
+// array Colors = [red, blue, yellow, purple, green];
+// array boardSquares = [color] ; index of array corresponds to id of square, color is one of the defined colors
+// player 1 & 2 = number of square piece is on (id of the square)
+// currentCard = one of the colors
 // Set location of each piece to the start of the board.
-// Ensure no card is drawn
-// Set turn to Player 1 and register event handler for draw button
+// Ensure no card is drawn (e.g. hide the card)
+// Set turn to Player 1 and register event handler for draw button -- draw will reveal the card with a random color
+
+// Variables (Game State/Model)
+
+
+// Initialization Functions
+
+
+
+// Controller Functions
+
+
+
 
 // 2. Play a turn
 // User clicks the Draw button to invoke the event handler.

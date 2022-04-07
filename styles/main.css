@@ -4,7 +4,9 @@ body {
 
 /* Layout of the overall page */
 
-
+.controls-container {
+    display: flex;
+}
 
 
 

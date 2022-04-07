@@ -135,7 +135,12 @@ function drawBoard(boardStateInput, player) {
     boardTableString += "</tr>";
 
     board.html(boardTableString);
-}  
+}
+
+/**
+ * Will update the given player location on the board without drawing the entire board again
+ */
+function updateBoard(boardState, player) { }
 
 const boardState = initializeBoardState();
 drawBoard(boardState, player1);

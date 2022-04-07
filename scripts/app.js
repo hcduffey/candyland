@@ -27,20 +27,27 @@ class Player {
     // based on the given board state, it updates the current direction the player should move
     // this should be invoked before every move
     checkMoveDirection(boardState) {
-        if(boardState[this.currentLocation + this.currentDirection] !== color.empty) {
-                return;
+        if(((this.currentLocation + this.currentDirection) > 0) && (boardState[this.currentLocation + this.currentDirection] !== color.empty)) {
+            return;
         }
-        else if(boardState[this.currentLocation + this.directions.left] !== color.empty) {
-                this.currentDirection = this.directions.left;
-        } else if(boardState[this.currentLocation + this.directions.right] !== color.empty) {
-                this.currentDirection = this.directions.right;
+        else if(((this.currentLocation + this.directions.up) > 0) && (boardState[this.currentLocation + this.directions.up] !== color.empty)) {
+            this.currentDirection = this.directions.up;
         }
+        else if(((this.currentLocation + this.directions.left) > 0) && (boardState[this.currentLocation + this.directions.left] !== color.empty)) {
+            this.currentDirection = this.directions.left;
+        } 
+        else if(((this.currentLocation + this.directions.right) > 0) && (boardState[this.currentLocation + this.directions.right] !== color.empty)) {
+            this.currentDirection = this.directions.right;
+        }
+
     }
 
     // based on the given board state, the players locaton is updated based on the direction its going
     movePlayer(boardState, color) {
         this.checkMoveDirection(boardState);
         this.currentLocation += this.currentDirection;
+
+        return boardState[this.currentLocation] === color;
     }
 }
 
@@ -143,12 +150,26 @@ function drawBoard(boardStateInput, player) {
     boardTableString += "</tr>";
 
     $(".board").html(boardTableString);
+    addBoardCuves();
+}
+
+/**
+ * Makes the turns in the board curvy
+ */
+function addBoardCuves() {
+    $("#106").addClass("top-left");
+    $("#117").addClass("bottom-right");
+
 }
 
 /**
  * Will update the given player location on the board without drawing the entire board again
  */
-function updateBoard(boardState, player) { }
+function updateBoard(player) {
+    $('.token').remove();
+    let tokenHTML = `<img class="token" src="${player.token}">`; 
+    $(`#${player.currentLocation}`).append(tokenHTML);
+}
 
 
 
@@ -161,8 +182,28 @@ function updateBoard(boardState, player) { }
  * Updates the active card to a random color
  */
 function drawCard() {
-    const drawnColor = color.blue;
+    let drawnColor;
+
     $('.card').removeClass("card-hidden");
+
+    switch(Math.ceil(Math.random()*5)) {
+        case 1:
+            drawnColor = color.green;
+            break;
+        case 2:
+            drawnColor = color.purple;
+            break;
+        case 3:
+            drawnColor = color.blue;
+            break;
+        default:
+            drawnColor = color.yellow;  
+    }
+    $('.card-square').removeClass(color.green);
+    $('.card-square').removeClass(color.purple);
+    $('.card-square').removeClass(color.blue);
+    $('.card-square').removeClass(color.yellow);
+
     $('.card-square').addClass(drawnColor);
     return drawnColor;
 }
@@ -174,9 +215,21 @@ drawBoard(boardState, player1);
 // Controller Functions
 
 $('.draw-btn').click(function() {
-    let currentColor = drawCard();
-    console.log(currentColor);
-    player1.movePlayer(boardState, currentColor);
+    let drawnColor = drawCard();
+    
+    while(player1.movePlayer(boardState, drawnColor) === false) {
+        console.log(`Player location: ${player1.currentLocation}`);
+        console.log(`Board color: ${boardState[player1.currentLocation]}`);
+        if(boardState[player1.currentLocation] === color.black) {
+            console.log("WINNER!!");
+            break;
+        }
+    } 
+
+    updateBoard(player1);
+    
+
+    
 });
 
 // 2. Play a turn

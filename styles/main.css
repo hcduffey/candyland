@@ -1,13 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Emilys+Candy&display=swap');
+
 body {
     background-image: url("../images/background.png");
 }
 
 /* Layout of the overall page */
 
-.controls-container {
+.game-container {
     display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
+.controls-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 2em;
+}
+
+
+/* Style the title */
+.title-container {
+    text-align: center;
+    color: white;
+}
+
+h1 {
+    font-family: 'Emilys Candy';
+    font-weight: 400;
+    font-size: 64px;
+}
 
 
 /* Layout of the game board */

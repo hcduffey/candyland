@@ -154,7 +154,7 @@ function drawBoard(boardStateInput, player) {
 }
 
 /**
- * Makes the turns in the board curvy
+ * Makes the turns in the board curvy so that the game board looks nice
  */
 function addBoardCuves() {
     $("#106").addClass("top-left");
@@ -164,9 +164,6 @@ function addBoardCuves() {
     $("#32").addClass("top-left");
     $("#41").addClass("bottom-right");
     $("#11").addClass("top-left");
-
-
-
 }
 
 /**

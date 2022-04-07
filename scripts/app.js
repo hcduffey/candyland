@@ -11,12 +11,14 @@
 // GAME STATE/MODEL
 
 class Player {
-    constructor(rowLength) {
+    constructor(rowLength, token) {
         this.directions = {
             up: -1 * (rowLength), // the length of a row in the board determines how many elements to move to go up a row
             left: -1,
             right: 1
         }
+
+        this.token = token;
 
         this.currentDirection = this.directions.up;
         this.currentLocation = 121;
@@ -25,16 +27,24 @@ class Player {
     // based on the given board state, it updates the current direction the player should move
     // this should be invoked before every move
     checkMoveDirection(boardState) {
-
+        if(boardState[this.currentLocation + this.currentDirection] !== color.empty) {
+                return;
+        }
+        else if(boardState[this.currentLocation + this.directions.left] !== color.empty) {
+                this.currentDirection = this.directions.left;
+        } else if(boardState[this.currentLocation + this.directions.right] !== color.empty) {
+                this.currentDirection = this.directions.right;
+        }
     }
 
     // based on the given board state, the players locaton is updated based on the direction its going
-    movePlayer(boardState) {
-
+    movePlayer(boardState, color) {
+        this.checkMoveDirection(boardState);
+        this.currentLocation += this.currentDirection;
     }
 }
 
-// stores the allowed colors for the board squares and cards
+// stores the allowed colors for the board squares and cards, color definitions are classes in the W3 CSS styles
 const color = {
     green: "w3-green", 
     purple: "w3-purple", 
@@ -47,7 +57,7 @@ const color = {
 const rowLength = 15;
 const board = $(".board");
 
-const player1 = new Player(rowLength);
+const player1 = new Player(rowLength, "./images/player1_token.png");
 
 // INITIALIZATION FUNCTIONS
 
@@ -104,17 +114,26 @@ function initializeBoardState() {
 }
 
 /**
- * creates the html table that will represent the game board based on the board state
+ * creates the html table that will represent the game board based on the board state and player locations
  */
-function drawBoard(boardStateInput) {
+function drawBoard(boardStateInput, player) {
     let boardTableString = "<tr>";
-
-    boardStateInput.forEach( (boardSquare, index) => {
+    
+    boardStateInput.forEach( (boardSquareColor, index) => {
         let printChar = "";
-        if(boardSquare !== "") {
+        let tokenHTML = "";
+        
+        if(boardSquareColor !== "") {
             printChar = index;
         }
-        boardTableString += `<td><div id="${index}" class="w3-panel ${boardSquare}">${printChar}</div></td>`;
+        
+        if(player.currentLocation === index) {
+            console.log(player.currentLocation + " : " + index);
+            tokenHTML = `<img class="token" src="${player.token}">`;
+            console.log(tokenHTML);
+        }
+
+        boardTableString += `<td><div id="${index}" class="w3-panel ${boardSquareColor}">${tokenHTML}</div></td>`;
         
         if(((index+1) % 15 === 0) && (index !== 0)) {
             boardTableString += "</tr><tr>";
@@ -123,13 +142,42 @@ function drawBoard(boardStateInput) {
     });
     boardTableString += "</tr>";
 
-    board.html(boardTableString);
-}  
+    $(".board").html(boardTableString);
+}
+
+/**
+ * Will update the given player location on the board without drawing the entire board again
+ */
+function updateBoard(boardState, player) { }
+
+
+
+/**
+ * Initialize card
+ */
+
+
+/**
+ * Updates the active card to a random color
+ */
+function drawCard() {
+    const drawnColor = color.blue;
+    $('.card').removeClass("card-hidden");
+    $('.card-square').addClass(drawnColor);
+    return drawnColor;
+}
+
 
 const boardState = initializeBoardState();
-drawBoard(boardState);
+drawBoard(boardState, player1);
 
 // Controller Functions
+
+$('.draw-btn').click(function() {
+    let currentColor = drawCard();
+    console.log(currentColor);
+    player1.movePlayer(boardState, currentColor);
+});
 
 // 2. Play a turn
 // User clicks the Draw button to invoke the event handler.

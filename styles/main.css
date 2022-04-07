@@ -4,7 +4,9 @@ body {
 
 /* Layout of the overall page */
 
-
+.controls-container {
+    display: flex;
+}
 
 
 
@@ -24,5 +26,34 @@ td {
     width: 65px;
     height: 65px;
     text-align: center;
+}
+
+/* Styles for the card */
+.card {
+    height: 80px;
+    width: 50px;
+    border: black 2px solid;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+}
+
+.card-hidden {
+    background-color: green;
+}
+
+.card-square {
+    height: 30px;
+    width: 30px;
+}
+
+/* Styles for player tokens */
+
+.token {
+    z-index: 2;
+    height: 60px;
+    width: 60px;
 }
 

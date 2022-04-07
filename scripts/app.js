@@ -27,12 +27,20 @@ class Player {
     // based on the given board state, it updates the current direction the player should move
     // this should be invoked before every move
     checkMoveDirection(boardState) {
-
+        if(boardState[this.currentLocation + this.currentDirection] !== color.empty) {
+                return;
+        }
+        else if(boardState[this.currentLocation + this.directions.left] !== color.empty) {
+                this.currentDirection = this.directions.left;
+        } else if(boardState[this.currentLocation + this.directions.right] !== color.empty) {
+                this.currentDirection = this.directions.right;
+        }
     }
 
     // based on the given board state, the players locaton is updated based on the direction its going
-    movePlayer(boardState) {
-
+    movePlayer(boardState, color) {
+        this.checkMoveDirection(boardState);
+        this.currentLocation += this.currentDirection;
     }
 }
 
@@ -134,7 +142,7 @@ function drawBoard(boardStateInput, player) {
     });
     boardTableString += "</tr>";
 
-    board.html(boardTableString);
+    $(".board").html(boardTableString);
 }
 
 /**
@@ -142,10 +150,34 @@ function drawBoard(boardStateInput, player) {
  */
 function updateBoard(boardState, player) { }
 
+
+
+/**
+ * Initialize card
+ */
+
+
+/**
+ * Updates the active card to a random color
+ */
+function drawCard() {
+    const drawnColor = color.blue;
+    $('.card').removeClass("card-hidden");
+    $('.card-square').addClass(drawnColor);
+    return drawnColor;
+}
+
+
 const boardState = initializeBoardState();
 drawBoard(boardState, player1);
 
 // Controller Functions
+
+$('.draw-btn').click(function() {
+    let currentColor = drawCard();
+    console.log(currentColor);
+    player1.movePlayer(boardState, currentColor);
+});
 
 // 2. Play a turn
 // User clicks the Draw button to invoke the event handler.

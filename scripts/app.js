@@ -159,6 +159,13 @@ function drawBoard(boardStateInput, player) {
 function addBoardCuves() {
     $("#106").addClass("top-left");
     $("#117").addClass("bottom-right");
+    $("#87").addClass("top-right");
+    $("#77").addClass("bottom-left");
+    $("#32").addClass("top-left");
+    $("#41").addClass("bottom-right");
+    $("#11").addClass("top-left");
+
+
 
 }
 

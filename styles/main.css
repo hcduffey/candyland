@@ -8,8 +8,21 @@ body {
 
 .game-container {
     display: flex;
+    min-height:100vh;
     flex-direction: column;
+    justify-content: space-between;
+    margin-top: 1em;
+}
+
+.board-container {
+    display: flex;
     justify-content: center;
+}
+
+.card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .controls-container {
@@ -17,6 +30,7 @@ body {
     justify-content: center;
     align-items: center;
     column-gap: 2em;
+    margin-top: 1em;
 }
 
 
@@ -69,16 +83,54 @@ td {
     border-radius: 0px 0px 0px 20px;
 }
 
+.secret-path {
+    border: 1px lightgray dashed;
+}
+
 /* Styles for the card */
 .card {
-    height: 80px;
-    width: 50px;
+    z-index: 4;
+    height: 180px;
+    width: 100px;
     border: black 2px solid;
     border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: white;
+}
+
+.card-stack-1 {
+    position: absolute; 
+    margin-top: 15px;
+    margin-left: 15px;
+    z-index: 1;
+    height: 180px;
+    width: 100px;
+    border: black 2px solid;
+    border-radius: 10px;
+}
+
+.card-stack-2 {
+    position: absolute;
+    margin-top: 10px;
+    margin-left: 10px;
+    z-index: 2;
+    height: 180px;
+    width: 100px;
+    border: black 2px solid;
+    border-radius: 10px;
+}
+
+.card-stack-3 {
+    position: absolute;
+    margin-top: 5px;
+    margin-left: 5px;
+    z-index: 3;
+    height: 180px;
+    width: 100px;
+    border: black 2px solid;
+    border-radius: 10px;
 }
 
 .card-hidden {
@@ -92,7 +144,7 @@ td {
 
 /* Styles for player tokens */
 
-.token {
+.token, .gumdrop {
     z-index: 2;
     height: 60px;
     width: 60px;

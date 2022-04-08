@@ -1,13 +1,3 @@
-// 1. Initialize the game and board
-
-// array Colors = [red, blue, yellow, purple, green];
-// array boardSquares = [color] ; index of array corresponds to id of square, color is one of the defined colors
-// player 1 & 2 = number of square piece is on (id of the square)
-// currentCard = one of the colors
-// Set location of each piece to the start of the board.
-// Ensure no card is drawn (e.g. hide the card)
-// Set turn to Player 1 and register event handler for draw button -- draw will reveal the card with a random color
-
 // GAME STATE/MODEL
 
 class Player {
@@ -151,6 +141,7 @@ function drawBoard(boardStateInput, player) {
 
     $(".board").html(boardTableString);
     addBoardCuves();
+    createSecretPath();
 }
 
 /**
@@ -159,11 +150,20 @@ function drawBoard(boardStateInput, player) {
 function addBoardCuves() {
     $("#106").addClass("top-left");
     $("#117").addClass("bottom-right");
-    $("#87").addClass("top-right");
     $("#77").addClass("bottom-left");
     $("#32").addClass("top-left");
-    $("#41").addClass("bottom-right");
+    $("#42").addClass("top-right");
     $("#11").addClass("top-left");
+}
+
+// Create a secret path through gumdrop pass
+function createSecretPath() {
+    $("#72").addClass("secret-path");
+    $("#57").addClass("secret-path");
+    $("#42").addClass("secret-path");
+
+    $("#58").html("<img class='gumdrop' src='../images/gumdrop.png' alt='gumdrop'>");
+    $("#71").html("<img class='gumdrop' src='../images/gumdrop.png' alt='gumdrop'>");
 }
 
 /**
@@ -212,10 +212,6 @@ function drawCard() {
     return drawnColor;
 }
 
-
-const boardState = initializeBoardState();
-drawBoard(boardState, player1);
-
 // Controller Functions
 
 $('.draw-btn').click(function() {
@@ -235,6 +231,13 @@ $('.draw-btn').click(function() {
 
     
 });
+
+
+
+let activeGame = false;
+const boardState = initializeBoardState();
+drawBoard(boardState, player1);
+
 
 // 2. Play a turn
 // User clicks the Draw button to invoke the event handler.

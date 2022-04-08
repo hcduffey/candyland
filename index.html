@@ -39,5 +39,40 @@
     </div>
 </div>
 
+
+<!-- Modals -->
+<div id="winner-modal" class="w3-modal w3-animate-opacity">
+  <div class="w3-modal-content w3-card-4">
+    <header class="w3-container w3-blue"> 
+      <span onclick="document.getElementById('winner-modal').style.display='none'" 
+      class="w3-button w3-large w3-display-topright">&times;</span>
+      <h2>Hooray!!</h2>
+    </header>
+    <div class="w3-container">
+      <p>You've reached the Candy Castle and won the game!</p>
+      <img id="castle-winner-img" src="images/castle.png" alt="castle">
+    </div>
+    <footer class="w3-container w3-blue">
+      <p>Close this dialog and click the Reset button to play again</p>
+    </footer>
+  </div>
+</div>
+
+<div id="secret-path-modal" class="w3-modal w3-animate-opacity">
+    <div class="w3-modal-content w3-card-4">
+      <header class="w3-container w3-blue"> 
+        <span onclick="document.getElementById('secret-path-modal').style.display='none'" 
+        class="w3-button w3-large w3-display-topright">&times;</span>
+        <h2>Hooray!!</h2>
+      </header>
+      <div class="w3-container">
+        <p>You found the secret path through Gum Drop Pass!</p>
+        <img id="castle-winner-img" src="images/gumdrop.png" alt="castle">
+      </div>
+    </div>
+</div>
+
+
+
 </body>
 </html>

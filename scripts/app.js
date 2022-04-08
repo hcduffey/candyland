@@ -249,6 +249,18 @@ $('.reset-btn').on("click", function() {
     updateBoard(player1);
 });
 
+/** Returns true of the user clicked the correct square, false otherwise */
+function isCorrectSquare(clickedSquare, boardState, drawnColor) {
+    console.log(clickedSquare);
+
+    if(boardState[clickedSquare] === drawnColor) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
 // Kick off game
 
 let drawUnlocked = true;
@@ -261,9 +273,8 @@ drawBoard(boardState, player1);
 
 // Have to add this event handler after drawBoard because those elements don't exist until then
 $('.white-border-square').on("click", function () {
-    console.log('Square Clicked!');
-    if(squareClickUnlocked) {
-        console.log('SquareClickUnlock is True!');
+    if(squareClickUnlocked && isCorrectSquare(parseInt($(this).attr("id")), boardState, drawnColor)) {
+        console.log('SquareClickUnlock and isCorrectSquare() are True!');
         while(player1.movePlayer(boardState, drawnColor) === false) {
             if(boardState[player1.currentLocation] === color.black) {
                 $("#14").html("");

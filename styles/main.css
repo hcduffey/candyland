@@ -87,6 +87,14 @@ td {
     border: 1px lightgray dashed;
 }
 
+.white-border-square {
+    border: 1px grey solid;
+}
+
+.castle-square {
+    padding: 2px 1px;
+}
+
 /* Styles for the card */
 .card {
     z-index: 4;
@@ -142,11 +150,25 @@ td {
     width: 30px;
 }
 
-/* Styles for player tokens */
+/* Styles for tokens */
 
-.token, .gumdrop {
+.token, .gumdrop, .castle-token {
     z-index: 2;
     height: 60px;
     width: 60px;
+}
+
+/* Modal styles */
+
+.w3-container {
+    text-align: center;
+}
+
+.w3-modal-content {
+    width: 400px;
+}
+
+#castle-winner-img {
+    width: 100px;
 }
 

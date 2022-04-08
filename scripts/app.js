@@ -14,6 +14,11 @@ class Player {
         this.currentLocation = 121;
     }
 
+    // called when restarting a game to place token back at the beginning
+    resetLocation() {
+        this.currentLocation = 121;
+    }
+
     // based on the given board state, it updates the current direction the player should move
     // this should be invoked before every move
     checkMoveDirection(boardState) {
@@ -117,11 +122,11 @@ function drawBoard(boardStateInput, player) {
     let boardTableString = "<tr>";
     
     boardStateInput.forEach( (boardSquareColor, index) => {
-        let printChar = "";
+        let usableBoardSquare = "";
         let tokenHTML = "";
         
         if(boardSquareColor !== "") {
-            printChar = index;
+            usableBoardSquare = "white-border-square";
         }
         
         if(player.currentLocation === index) {
@@ -130,7 +135,7 @@ function drawBoard(boardStateInput, player) {
             console.log(tokenHTML);
         }
 
-        boardTableString += `<td><div id="${index}" class="w3-panel ${boardSquareColor}">${tokenHTML}</div></td>`;
+        boardTableString += `<td><div id="${index}" class="w3-panel ${boardSquareColor} ${usableBoardSquare}">${tokenHTML}</div></td>`;
         
         if(((index+1) % 15 === 0) && (index !== 0)) {
             boardTableString += "</tr><tr>";
@@ -142,6 +147,7 @@ function drawBoard(boardStateInput, player) {
     $(".board").html(boardTableString);
     addBoardCuves();
     createSecretPath();
+    addCastle();
 }
 
 /**
@@ -166,6 +172,11 @@ function createSecretPath() {
     $("#71").html("<img class='gumdrop' src='../images/gumdrop.png' alt='gumdrop'>");
 }
 
+function addCastle() {
+    $("#14").addClass("castle-square");
+    $("#14").html("<img class='castle-token' src='../images/castle.png' alt='castle'>");
+}
+
 /**
  * Will update the given player location on the board without drawing the entire board again
  */
@@ -175,12 +186,16 @@ function updateBoard(player) {
     $(`#${player.currentLocation}`).append(tokenHTML);
 }
 
-
-
 /**
- * Initialize card
+ * Makes the top card face down
  */
-
+function resetCard() {
+    $('.card').addClass("card-hidden");
+    $('.card-square').removeClass(color.blue);
+    $('.card-square').removeClass(color.green);
+    $('.card-square').removeClass(color.purple);
+    $('.card-square').removeClass(color.yellow);
+}
 
 /**
  * Updates the active card to a random color
@@ -214,27 +229,44 @@ function drawCard() {
 
 // Controller Functions
 
-$('.draw-btn').click(function() {
-    let drawnColor = drawCard();
+$('.draw-btn').on("click", function() {
+    if(activeGame) {
+        let drawnColor = drawCard();
     
-    while(player1.movePlayer(boardState, drawnColor) === false) {
-        console.log(`Player location: ${player1.currentLocation}`);
-        console.log(`Board color: ${boardState[player1.currentLocation]}`);
-        if(boardState[player1.currentLocation] === color.black) {
-            console.log("WINNER!!");
-            break;
+        while(player1.movePlayer(boardState, drawnColor) === false) {
+            if(boardState[player1.currentLocation] === color.black) {
+                $("#14").html("");
+                $('#winner-modal').css("display", "block");
+                activeGame = false;
+                break;
+            }
         }
-    } 
 
-    updateBoard(player1);
+        // Check if player lands on the secret path square
+        if(player1.currentLocation === 87) {
+            activeGame = false;
+            setTimeout(function() {
+                console.log("You found the secret path!");
+                $('#secret-path-modal').css("display", "block");
+                activeGame = true;
+            }, 1000);
+            player1.currentLocation = 41;
+        }
     
-
-    
+        updateBoard(player1);
+    }    
 });
 
+$('.reset-btn').on("click", function() {
+    activeGame = true;
+    player1.resetLocation();
+    console.log(player1.currentLocation)
+    resetCard();
+    addCastle();
+    updateBoard(player1);
+});
 
-
-let activeGame = false;
+let activeGame = true;
 const boardState = initializeBoardState();
 drawBoard(boardState, player1);
 

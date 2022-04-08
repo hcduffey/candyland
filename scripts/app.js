@@ -227,48 +227,70 @@ function drawCard() {
     return drawnColor;
 }
 
-// Controller Functions
+// Event Handlers
 
 $('.draw-btn').on("click", function() {
-    if(activeGame) {
-        let drawnColor = drawCard();
-    
-        while(player1.movePlayer(boardState, drawnColor) === false) {
-            if(boardState[player1.currentLocation] === color.black) {
-                $("#14").html("");
-                $('#winner-modal').css("display", "block");
-                activeGame = false;
-                break;
-            }
-        }
+    console.log("Draw clicked!")
+    if(drawUnlocked) {
+        console.log("DrawUnlocked is True!");
+        drawnColor = drawCard();
 
-        // Check if player lands on the secret path square
-        if(player1.currentLocation === 87) {
-            activeGame = false;
-            setTimeout(function() {
-                console.log("You found the secret path!");
-                $('#secret-path-modal').css("display", "block");
-                activeGame = true;
-            }, 1000);
-            player1.currentLocation = 41;
-        }
-    
-        updateBoard(player1);
+        drawUnlocked = false;
+        squareClickUnlocked = true;
     }    
 });
 
 $('.reset-btn').on("click", function() {
-    activeGame = true;
+    drawUnlocked = true;
+    squareClickUnlocked = false;
     player1.resetLocation();
-    console.log(player1.currentLocation)
     resetCard();
     addCastle();
     updateBoard(player1);
 });
 
-let activeGame = true;
+// Kick off game
+
+let drawUnlocked = true;
+let squareClickUnlocked = false;
+
+let drawnColor;
+
 const boardState = initializeBoardState();
 drawBoard(boardState, player1);
+
+// Have to add this event handler after drawBoard because those elements don't exist until then
+$('.white-border-square').on("click", function () {
+    console.log('Square Clicked!');
+    if(squareClickUnlocked) {
+        console.log('SquareClickUnlock is True!');
+        while(player1.movePlayer(boardState, drawnColor) === false) {
+            if(boardState[player1.currentLocation] === color.black) {
+                $("#14").html("");
+                $('#winner-modal').css("display", "block");
+                drawUnlocked = false;
+                squareClickUnlocked = false;
+                return;
+            }
+        }
+
+        // Check if player lands on the secret path square
+        if(player1.currentLocation === 87) {
+            drawUnlocked = false;
+            setTimeout(function() {
+                console.log("You found the secret path!");
+                $('#secret-path-modal').css("display", "block");
+                drawUnlocked = true;
+            }, 1000);
+            player1.currentLocation = 41;
+        }
+
+        drawUnlocked = true;
+        squareClickUnlocked = false;
+
+        updateBoard(player1);
+    }
+});
 
 
 // 2. Play a turn

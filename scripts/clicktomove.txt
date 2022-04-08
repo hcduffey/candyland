@@ -1,0 +1,45 @@
+when draw button is clicked
+   check if draw card capability is unlocked
+      draw card
+      lock draw capability
+      unlock square-click capability
+
+when square is clicked
+   check if square-click capability is unlocked
+      check if correct square has been clicked  
+          move player
+          lock square-click capability
+          unlock draw capability
+
+
+$('.white-border-square').on("click", function () {
+    console.log('Square Clicked!');
+    if(squareClickUnlocked) {
+        console.log('SquareClickUnlock is True!');
+        while(player1.movePlayer(boardState, drawnColor) === false) {
+            if(boardState[player1.currentLocation] === color.black) {
+                $("#14").html("");
+                $('#winner-modal').css("display", "block");
+                drawUnlocked = false;
+                squareClickUnlocked = false;
+                return;
+            }
+        }
+
+        // Check if player lands on the secret path square
+        if(player1.currentLocation === 87) {
+            drawUnlocked = false;
+            setTimeout(function() {
+                console.log("You found the secret path!");
+                $('#secret-path-modal').css("display", "block");
+                drawUnlocked = true;
+            }, 1000);
+            player1.currentLocation = 41;
+        }
+
+        drawUnlocked = true;
+        squareClickUnlocked = false;
+
+        updateBoard(player1);
+    }
+});

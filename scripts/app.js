@@ -320,5 +320,8 @@ $('.white-border-square').on("click", function () {
         squareClickUnlocked = false;
 
         updateBoard(currentPlayer);
+
+        // switch to the next player
+        currentPlayer === player1 ? currentPlayer = player2 : currentPlayer = player1;
     }
 });

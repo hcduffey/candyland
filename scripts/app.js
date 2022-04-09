@@ -1,7 +1,7 @@
 // GAME STATE/MODEL
 
 class Player {
-    constructor(rowLength, token) {
+    constructor(rowLength, token, playerNumber) {
         this.directions = {
             up: -1 * (rowLength), // the length of a row in the board determines how many elements to move to go up a row
             left: -1,
@@ -12,6 +12,7 @@ class Player {
 
         this.currentDirection = this.directions.up;
         this.currentLocation = 121;
+        this.playerNumber = playerNumber;
     }
 
     // called when restarting a game to place token back at the beginning
@@ -59,8 +60,8 @@ const color = {
 const rowLength = 15;
 const board = $(".board");
 
-const player1 = new Player(rowLength, "./images/player1_token.png");
-const player2 = new Player(rowLength, "./images/player2_token.png");
+const player1 = new Player(rowLength, "./images/player1_token.png", "one");
+const player2 = new Player(rowLength, "./images/player2_token.png", "two");
 let currentPlayer = player1;
 
 // INITIALIZATION FUNCTIONS
@@ -133,7 +134,7 @@ function drawBoard(boardStateInput, player) {
         
         if(player.currentLocation === index) {
             console.log(player.currentLocation + " : " + index);
-            tokenHTML = `<img class="token" src="${player.token}">`;
+            tokenHTML = `<img class="token ${player.playerNumber}" src="${player.token}">`;
             console.log(tokenHTML);
         }
 
@@ -183,8 +184,8 @@ function addCastle() {
  * Will update the given player location on the board without drawing the entire board again
  */
 function updateBoard(player) {
-    $('.token').remove();
-    let tokenHTML = `<img class="token" src="${player.token}">`; 
+    $(`.${player.playerNumber}`).remove();
+    let tokenHTML = `<img class="token ${player.playerNumber}" src="${player.token}">`; 
     $(`#${player.currentLocation}`).append(tokenHTML);
 }
 

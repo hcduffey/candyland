@@ -158,6 +158,10 @@ td {
     width: 60px;
 }
 
+.one {
+    z-index: 3;
+}
+
 /* Modal styles */
 
 .w3-container {

@@ -1,7 +1,7 @@
 // GAME STATE/MODEL
 
 class Player {
-    constructor(rowLength, token) {
+    constructor(rowLength, token, playerNumber) {
         this.directions = {
             up: -1 * (rowLength), // the length of a row in the board determines how many elements to move to go up a row
             left: -1,
@@ -12,6 +12,7 @@ class Player {
 
         this.currentDirection = this.directions.up;
         this.currentLocation = 121;
+        this.playerNumber = playerNumber;
     }
 
     // called when restarting a game to place token back at the beginning
@@ -59,7 +60,9 @@ const color = {
 const rowLength = 15;
 const board = $(".board");
 
-const player1 = new Player(rowLength, "./images/player1_token.png");
+const player1 = new Player(rowLength, "./images/player1_token.png", "one");
+const player2 = new Player(rowLength, "./images/player2_token.png", "two");
+let currentPlayer = player1;
 
 // INITIALIZATION FUNCTIONS
 
@@ -131,7 +134,7 @@ function drawBoard(boardStateInput, player) {
         
         if(player.currentLocation === index) {
             console.log(player.currentLocation + " : " + index);
-            tokenHTML = `<img class="token" src="${player.token}">`;
+            tokenHTML = `<img class="token ${player.playerNumber}" src="${player.token}">`;
             console.log(tokenHTML);
         }
 
@@ -181,8 +184,8 @@ function addCastle() {
  * Will update the given player location on the board without drawing the entire board again
  */
 function updateBoard(player) {
-    $('.token').remove();
-    let tokenHTML = `<img class="token" src="${player.token}">`; 
+    $(`.${player.playerNumber}`).remove();
+    let tokenHTML = `<img class="token ${player.playerNumber}" src="${player.token}">`; 
     $(`#${player.currentLocation}`).append(tokenHTML);
 }
 
@@ -242,10 +245,10 @@ $('.draw-btn').on("click", function() {
 $('.reset-btn').on("click", function() {
     drawUnlocked = true;
     squareClickUnlocked = false;
-    player1.resetLocation();
+    currentPlayer.resetLocation();
     resetCard();
     addCastle();
-    updateBoard(player1);
+    updateBoard(currentPlayer);
 });
 
 /** Returns true of the user clicked the correct square that matches their drawn card, false otherwise */
@@ -286,16 +289,16 @@ let squareClickUnlocked = false;
 let drawnColor;
 
 const boardState = initializeBoardState();
-drawBoard(boardState, player1);
+drawBoard(boardState, currentPlayer);
 
 // Have to add this event handler after drawBoard because those elements don't exist until then
 $('.white-border-square').on("click", function () {
     // check if user is in the square-click phase of their turn, and that they clicked the correct square
-    if(squareClickUnlocked && isCorrectSquare(parseInt($(this).attr("id")), boardState, drawnColor, player1)) {
-        while(player1.movePlayer(boardState, drawnColor) === false) {
-            if(boardState[player1.currentLocation] === color.black) {
+    if(squareClickUnlocked && isCorrectSquare(parseInt($(this).attr("id")), boardState, drawnColor, currentPlayer)) {
+        while(currentPlayer.movePlayer(boardState, drawnColor) === false) {
+            if(boardState[currentPlayer.currentLocation] === color.black) {
                 $("#14").html("");
-                updateBoard(player1);
+                updateBoard(currentPlayer);
                 $('#winner-modal').css("display", "block");
                 drawUnlocked = false;
                 squareClickUnlocked = false;
@@ -304,33 +307,22 @@ $('.white-border-square').on("click", function () {
         }
 
         // Check if player lands on the secret path square
-        if(player1.currentLocation === 87) {
+        if(currentPlayer.currentLocation === 87) {
             drawUnlocked = false;
             setTimeout(function() {
                 console.log("You found the secret path!");
                 $('#secret-path-modal').css("display", "block");
                 drawUnlocked = true;
             }, 1000);
-            player1.currentLocation = 41;
+            currentPlayer.currentLocation = 41;
         }
 
         drawUnlocked = true;
         squareClickUnlocked = false;
 
-        updateBoard(player1);
+        updateBoard(currentPlayer);
+
+        // switch to the next player
+        currentPlayer === player1 ? currentPlayer = player2 : currentPlayer = player1;
     }
 });
-
-
-// 2. Play a turn
-// User clicks the Draw button to invoke the event handler.
-// The handler will draw a card, and move to the players game piece to the corresponding square
-
-// 3. Check of Win
-// If the location of that players piece is at the end of the board state array, we have a winner and pop up a modal
-
-
-// 4. Switch turns
-// If there isn't a winner, switch to player two and listen for the Draw event for that player
-
-

@@ -229,10 +229,9 @@ function drawCard() {
 
 // Event Handlers
 
+// When the draw button is clicked, reveal a new card. There is also a check to make sure the user is in the draw phase of their turn -- if the user isn't selecting a square to move
 $('.draw-btn').on("click", function() {
-    console.log("Draw clicked!")
     if(drawUnlocked) {
-        console.log("DrawUnlocked is True!");
         drawnColor = drawCard();
 
         drawUnlocked = false;
@@ -249,20 +248,38 @@ $('.reset-btn').on("click", function() {
     updateBoard(player1);
 });
 
-/** Returns true of the user clicked the correct square, false otherwise */
-function isCorrectSquare(clickedSquare, boardState, drawnColor) {
-    console.log(clickedSquare);
+/** Returns true of the user clicked the correct square that matches their drawn card, false otherwise */
+function isCorrectSquare(clickedSquare, boardState, drawnColor, player) {
 
-    if(boardState[clickedSquare] === drawnColor) {
-        return true;
-    }
-    else {
+    /** CLOSEST SQUARE CHECK */
+    /**
+     * Create a copy of the curren player object, and progress that copies location forward until it finds a black square or the drawn color. 
+     * It then checks that found closest square of that color equals the clicked square
+     */
+    const fauxPlayer = new Player(15, null);
+    fauxPlayer.currentLocation = player.currentLocation;
+    fauxPlayer.currentDirection = player.currentDirection;
+
+    let foundSquare = false;
+    do {
+        foundSquare = fauxPlayer.movePlayer(boardState, drawnColor); 
+
+        // If the black square (square at the end of the board) is reached before finding a square that matches the drawn card, the player wins
+        if(boardState[fauxPlayer.currentLocation] === color.black) {
+            foundSquare = true;
+        }
+    } while(!foundSquare);
+
+    if(clickedSquare !== fauxPlayer.currentLocation) {
         return false;
     }
+
+    /** Need to fix win condition - no longer lets you click to win */
+
+    return true;
 }
 
 // Kick off game
-
 let drawUnlocked = true;
 let squareClickUnlocked = false;
 
@@ -273,11 +290,12 @@ drawBoard(boardState, player1);
 
 // Have to add this event handler after drawBoard because those elements don't exist until then
 $('.white-border-square').on("click", function () {
-    if(squareClickUnlocked && isCorrectSquare(parseInt($(this).attr("id")), boardState, drawnColor)) {
-        console.log('SquareClickUnlock and isCorrectSquare() are True!');
+    // check if user is in the square-click phase of their turn, and that they clicked the correct square
+    if(squareClickUnlocked && isCorrectSquare(parseInt($(this).attr("id")), boardState, drawnColor, player1)) {
         while(player1.movePlayer(boardState, drawnColor) === false) {
             if(boardState[player1.currentLocation] === color.black) {
                 $("#14").html("");
+                updateBoard(player1);
                 $('#winner-modal').css("display", "block");
                 drawUnlocked = false;
                 squareClickUnlocked = false;

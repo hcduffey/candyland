@@ -227,48 +227,99 @@ function drawCard() {
     return drawnColor;
 }
 
-// Controller Functions
+// Event Handlers
 
+// When the draw button is clicked, reveal a new card. There is also a check to make sure the user is in the draw phase of their turn -- if the user isn't selecting a square to move
 $('.draw-btn').on("click", function() {
-    if(activeGame) {
-        let drawnColor = drawCard();
-    
-        while(player1.movePlayer(boardState, drawnColor) === false) {
-            if(boardState[player1.currentLocation] === color.black) {
-                $("#14").html("");
-                $('#winner-modal').css("display", "block");
-                activeGame = false;
-                break;
-            }
-        }
+    if(drawUnlocked) {
+        drawnColor = drawCard();
 
-        // Check if player lands on the secret path square
-        if(player1.currentLocation === 87) {
-            activeGame = false;
-            setTimeout(function() {
-                console.log("You found the secret path!");
-                $('#secret-path-modal').css("display", "block");
-                activeGame = true;
-            }, 1000);
-            player1.currentLocation = 41;
-        }
-    
-        updateBoard(player1);
+        drawUnlocked = false;
+        squareClickUnlocked = true;
     }    
 });
 
 $('.reset-btn').on("click", function() {
-    activeGame = true;
+    drawUnlocked = true;
+    squareClickUnlocked = false;
     player1.resetLocation();
-    console.log(player1.currentLocation)
     resetCard();
     addCastle();
     updateBoard(player1);
 });
 
-let activeGame = true;
+/** Returns true of the user clicked the correct square that matches their drawn card, false otherwise */
+function isCorrectSquare(clickedSquare, boardState, drawnColor, player) {
+
+    /** CLOSEST SQUARE CHECK */
+    /**
+     * Create a copy of the curren player object, and progress that copies location forward until it finds a black square or the drawn color. 
+     * It then checks that found closest square of that color equals the clicked square
+     */
+    const fauxPlayer = new Player(15, null);
+    fauxPlayer.currentLocation = player.currentLocation;
+    fauxPlayer.currentDirection = player.currentDirection;
+
+    let foundSquare = false;
+    do {
+        foundSquare = fauxPlayer.movePlayer(boardState, drawnColor); 
+
+        // If the black square (square at the end of the board) is reached before finding a square that matches the drawn card, the player wins
+        if(boardState[fauxPlayer.currentLocation] === color.black) {
+            foundSquare = true;
+        }
+    } while(!foundSquare);
+
+    if(clickedSquare !== fauxPlayer.currentLocation) {
+        return false;
+    }
+
+    /** Need to fix win condition - no longer lets you click to win */
+
+    return true;
+}
+
+// Kick off game
+let drawUnlocked = true;
+let squareClickUnlocked = false;
+
+let drawnColor;
+
 const boardState = initializeBoardState();
 drawBoard(boardState, player1);
+
+// Have to add this event handler after drawBoard because those elements don't exist until then
+$('.white-border-square').on("click", function () {
+    // check if user is in the square-click phase of their turn, and that they clicked the correct square
+    if(squareClickUnlocked && isCorrectSquare(parseInt($(this).attr("id")), boardState, drawnColor, player1)) {
+        while(player1.movePlayer(boardState, drawnColor) === false) {
+            if(boardState[player1.currentLocation] === color.black) {
+                $("#14").html("");
+                updateBoard(player1);
+                $('#winner-modal').css("display", "block");
+                drawUnlocked = false;
+                squareClickUnlocked = false;
+                return;
+            }
+        }
+
+        // Check if player lands on the secret path square
+        if(player1.currentLocation === 87) {
+            drawUnlocked = false;
+            setTimeout(function() {
+                console.log("You found the secret path!");
+                $('#secret-path-modal').css("display", "block");
+                drawUnlocked = true;
+            }, 1000);
+            player1.currentLocation = 41;
+        }
+
+        drawUnlocked = true;
+        squareClickUnlocked = false;
+
+        updateBoard(player1);
+    }
+});
 
 
 // 2. Play a turn

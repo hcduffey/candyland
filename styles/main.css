@@ -4,6 +4,21 @@ body {
     background-image: url("../images/background.png");
 }
 
+body::after {
+    content: "";
+    background: url("../images/player1_token.png");
+    background-position-x: right;
+    background-position-y: 0;
+    background-repeat: no-repeat;
+    opacity: 0.3;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;   
+  }
+
 /* Layout of the overall page */
 
 .game-container {

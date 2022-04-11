@@ -183,8 +183,7 @@ function createSecretPath() {
 }
 
 function createCandyCaneForest() {
-    $("#2").html("<img class='token' src='../images/candy-cane.png' alt='candycane'>");
-
+    
     $("#16").html("<img class='token' src='../images/candy-cane.png' alt='candycane'>");
     $("#17").html("<img class='token' src='../images/candy-cane.png' alt='candycane'>");
     $("#18").html("<img class='token' src='../images/candy-cane.png' alt='candycane'>");
@@ -268,10 +267,14 @@ $('.draw-btn').on("click", function() {
 $('.reset-btn').on("click", function() {
     drawUnlocked = true;
     squareClickUnlocked = false;
-    currentPlayer.resetLocation();
+    player1.resetLocation();
+    player2.resetLocation();
+    currentPlayer = player1;
     resetCard();
     addCastle();
-    $('.status-container-player').toggleClass("active-player");
+    $('.status-container-player1').removeClass("active-player");
+    $('.status-container-player1').addClass("active-player");
+    $('.status-container-player2').removeClass("active-player");
     $('.current-phase').text("Draw Card");
     updateBoard(currentPlayer);
 });

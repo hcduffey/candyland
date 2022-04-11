@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Emilys+Candy&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Emilys+Candy&family=Montserrat:wght@300&display=swap&display=swap');
 
 body {
     background-image: url("../images/background.png");
@@ -150,7 +150,43 @@ td {
     width: 30px;
 }
 
+/* Player status */
+.status-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: bottom;
+    width: 80%;
+    margin: auto;
+}
+
+h2 {
+    font-family: 'Montserrat', sans-serif;
+    color: purple;
+}
+
+.active-player {
+    border-bottom: 3px purple solid;
+}
+
+.status-container-player {
+    margin-top: 15px;
+    padding-top: 10px;
+}
+
+.turn-phase {
+    width: 394px;
+}
+
+.current-phase {
+    font-family: 'Montserrat', sans-serif;
+    color: purple;
+}
+
 /* Styles for tokens */
+
+.status-token {
+    height: 100px;
+}
 
 .token, .gumdrop, .castle-token {
     z-index: 2;

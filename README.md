@@ -2,7 +2,37 @@
 
 ## Project Overview
 
-A simple browser-based version of the Candyland board game. Moves are made by clicking a "Draw" button to draw a card that indicates the color square the player moves to. The first player to make it to the end of the board wins.
+A simple browser-based version of the Candyland game. Candlyland is a classic board game was first published in 1949. Its aim is to provide a fun game for young children can play without knowing how to count. Moves are made by clicking a "Draw" button to draw a card that indicates the color square the player moves to. The first player to make it to the end of the board wins.
+
+## Getting Started
+
+The page loads with the game ready to play, and set to Player 1's turn. Each player completes a turn by clicking the 'Draw' button to draw a clard, then clicks the next square that matches the color of the drawn card.
+
+### Shortcut through Gumdrop Pass
+
+If a player lands on the purple square nearest Gum Drop Pass, their game piece advances through the "shortcut" through the Pass illustrated by the dotted lined squares.
+
+## Screenshots
+
+![image](images/screen_shot.png)
+
+## Technologies Used
+
+- HTML
+- CSS (W3CSS Framework)
+- Javascript (JQuery)
+
+## Install
+
+1. Clone the source from Github
+2. Run 'npm install' to download and install JQuery
+3. View index.html in a browser
+
+## Next Steps
+
+Planned future enhancements (icebox items).
+
+# App Developement
 
 ## Wireframes
 

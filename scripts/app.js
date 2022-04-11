@@ -361,7 +361,6 @@ $('.white-border-square').on("click", function () {
                 drawUnlocked = true;
                 playerSwitchOk = true;
             }, 2500);
-            
         }
 
         drawUnlocked = true;

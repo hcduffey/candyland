@@ -17,14 +17,28 @@
         <table class="board">
         </table>
     </div>
-    <div class="card-container">
-        <div class="card card-hidden">
-            <div class="card-square"></div>
-        </div>
-        <div class="card-stack-1 card-hidden"></div>
-        <div class="card-stack-2 card-hidden"></div>
-        <div class="card-stack-3 card-hidden"></div> 
-        <div class="card-stack-4 card-hidden"></div>
+    <div class="status-container">
+      <div class="status-container-player active-player">
+        <img class="status-token" src="images/player1_token.png">
+        <h2>Player 1</h2>
+      </div>
+      <div class="status-container-player">
+        <img class="status-token" src="images/player2_token.png">
+        <h2>Player 2</h2>
+      </div>
+      <div class="card-container">
+          <div class="card card-hidden">
+              <div class="card-square"></div>
+          </div>
+          <div class="card-stack-1 card-hidden"></div>
+          <div class="card-stack-2 card-hidden"></div>
+          <div class="card-stack-3 card-hidden"></div> 
+          <div class="card-stack-4 card-hidden"></div>
+      </div>
+      <div class="turn-phase">
+        <h2>Turn Phase:</h2>
+        <h1 class="current-phase">Draw Card</h1>
+      </div>
     </div>
     <div class="controls-container w3-blue">
         <div class="draw-btn-container">

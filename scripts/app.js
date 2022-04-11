@@ -239,15 +239,21 @@ $('.draw-btn').on("click", function() {
 
         drawUnlocked = false;
         squareClickUnlocked = true;
+
+        $('.current-phase').text("Click Square");
     }    
 });
 
+
+/** resets the board to its initial state and restarts the game */
 $('.reset-btn').on("click", function() {
     drawUnlocked = true;
     squareClickUnlocked = false;
     currentPlayer.resetLocation();
     resetCard();
     addCastle();
+    $('.status-container-player').toggleClass("active-player");
+    $('.current-phase').text("Draw Card");
     updateBoard(currentPlayer);
 });
 
@@ -298,6 +304,7 @@ $('.white-border-square').on("click", function () {
         while(currentPlayer.movePlayer(boardState, drawnColor) === false) {
             if(boardState[currentPlayer.currentLocation] === color.black) {
                 $("#14").html("");
+                $('.current-phase').text("Game Over!");
                 updateBoard(currentPlayer);
                 $('#winner-modal').css("display", "block");
                 drawUnlocked = false;
@@ -324,5 +331,7 @@ $('.white-border-square').on("click", function () {
 
         // switch to the next player
         currentPlayer === player1 ? currentPlayer = player2 : currentPlayer = player1;
+        $('.status-container-player').toggleClass("active-player");
+        $('.current-phase').text("Draw Card");
     }
 });

@@ -161,8 +161,8 @@ td {
 }
 
 .card-square {
-    height: 30px;
-    width: 30px;
+    height: 50px;
+    width: 50px;
 }
 
 /* Player status */
@@ -207,10 +207,6 @@ h2 {
     z-index: 2;
     height: 60px;
     width: 60px;
-}
-
-.one {
-    z-index: 3;
 }
 
 /* Modal styles */

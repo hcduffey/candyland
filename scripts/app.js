@@ -199,12 +199,18 @@ function addCastle() {
 }
 
 /**
- * Will update the given player location on the board without drawing the entire board again
+ * Will update the player locations on the board without drawing the entire board again. It checks if player 2 should be displayed, because we don't display player2 if the tokens are on the same square
  */
-function updateBoard(player) {
-    $(`.${player.playerNumber}`).remove();
-    let tokenHTML = `<img class="token ${player.playerNumber}" src="${player.token}">`; 
-    $(`#${player.currentLocation}`).append(tokenHTML);
+function updateBoard(showPlayer2 = true) {
+    $(`.${player1.playerNumber}`).remove();
+    let tokenHTML1 = `<img class="token ${player1.playerNumber}" src="${player1.token}">`; 
+    $(`#${player1.currentLocation}`).append(tokenHTML1);
+
+    $(`.${player2.playerNumber}`).remove();
+    let tokenHTML2 = `<img class="token ${player2.playerNumber}" src="${player2.token}">`; 
+    if(showPlayer2 && player2.currentLocation !== player1.currentLocation) {
+        $(`#${player2.currentLocation}`).append(tokenHTML2);
+    }
 }
 
 /**
@@ -272,11 +278,11 @@ $('.reset-btn').on("click", function() {
     currentPlayer = player1;
     resetCard();
     addCastle();
-    $('.status-container-player1').removeClass("active-player");
-    $('.status-container-player1').addClass("active-player");
+    $('.status-container-player1').removeClass("active-player"); // remove active from both players
     $('.status-container-player2').removeClass("active-player");
+    $('.status-container-player1').addClass("active-player"); // add it back to player 1
     $('.current-phase').text("Draw Card");
-    updateBoard(currentPlayer);
+    updateBoard(false);
 });
 
 /** Returns true of the user clicked the correct square that matches their drawn card, false otherwise */

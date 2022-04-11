@@ -150,6 +150,7 @@ function drawBoard(boardStateInput, player) {
     $(".board").html(boardTableString);
     addBoardCuves();
     createSecretPath();
+    createCandyCaneForest();
     addCastle();
 }
 
@@ -171,8 +172,25 @@ function createSecretPath() {
     $("#57").addClass("secret-path");
     $("#42").addClass("secret-path");
 
+    $("#27").html("<img class='gumdrop' src='../images/gumdrop.png' alt='gumdrop'>");
+    $("#28").html("<img class='gumdrop' src='../images/gumdrop.png' alt='gumdrop'>");
+    $("#43").html("<img class='gumdrop' src='../images/gumdrop.png' alt='gumdrop'>");
+    $("#44").html("<img class='gumdrop' src='../images/gumdrop.png' alt='gumdrop'>");
+    $("#55").html("<img class='gumdrop' src='../images/gumdrop.png' alt='gumdrop'>");
+    $("#56").html("<img class='gumdrop' src='../images/gumdrop.png' alt='gumdrop'>");
     $("#58").html("<img class='gumdrop' src='../images/gumdrop.png' alt='gumdrop'>");
     $("#71").html("<img class='gumdrop' src='../images/gumdrop.png' alt='gumdrop'>");
+}
+
+function createCandyCaneForest() {
+    
+    $("#16").html("<img class='token' src='../images/candy-cane.png' alt='candycane'>");
+    $("#17").html("<img class='token' src='../images/candy-cane.png' alt='candycane'>");
+    $("#18").html("<img class='token' src='../images/candy-cane.png' alt='candycane'>");
+    $("#19").html("<img class='token' src='../images/candy-cane.png' alt='candycane'>");
+
+    $("#31").html("<img class='token' src='../images/candy-cane.png' alt='candycane'>");
+    $("#46").html("<img class='token' src='../images/candy-cane.png' alt='candycane'>");
 }
 
 function addCastle() {
@@ -249,10 +267,14 @@ $('.draw-btn').on("click", function() {
 $('.reset-btn').on("click", function() {
     drawUnlocked = true;
     squareClickUnlocked = false;
-    currentPlayer.resetLocation();
+    player1.resetLocation();
+    player2.resetLocation();
+    currentPlayer = player1;
     resetCard();
     addCastle();
-    $('.status-container-player').toggleClass("active-player");
+    $('.status-container-player1').removeClass("active-player");
+    $('.status-container-player1').addClass("active-player");
+    $('.status-container-player2').removeClass("active-player");
     $('.current-phase').text("Draw Card");
     updateBoard(currentPlayer);
 });

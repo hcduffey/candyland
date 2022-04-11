@@ -311,14 +311,22 @@ function isCorrectSquare(clickedSquare, boardState, drawnColor, player) {
         return false;
     }
 
-    /** Need to fix win condition - no longer lets you click to win */
-
     return true;
+}
+
+let foundSecretPath = function(player) {
+    console.log("You found the secret path!");
+    player.currentLocation = 41;
+    updateBoard(player);
+    drawUnlocked = true;
 }
 
 // Kick off game
 let drawUnlocked = true;
 let squareClickUnlocked = false;
+let playerSwitchOk = true;
+
+let cheat = false;
 
 let drawnColor;
 
@@ -341,15 +349,26 @@ $('.white-border-square').on("click", function () {
             }
         }
 
+        if(cheat) {
+            currentPlayer.currentLocation = 87
+        }
+
         // Check if player lands on the secret path square
         if(currentPlayer.currentLocation === 87) {
             drawUnlocked = false;
+            playerSwitchOk = false;
+            $('#secret-path-modal').css("display", "block");
             setTimeout(function() {
                 console.log("You found the secret path!");
-                $('#secret-path-modal').css("display", "block");
+                currentPlayer.currentLocation = 41;
+                updateBoard(currentPlayer);
+                currentPlayer === player1 ? currentPlayer = player2 : currentPlayer = player1;
+                $('.status-container-player').toggleClass("active-player");
+                $('.current-phase').text("Draw Card");
                 drawUnlocked = true;
-            }, 1000);
-            currentPlayer.currentLocation = 41;
+                playerSwitchOk = true;
+            }, 2500);
+            
         }
 
         drawUnlocked = true;
@@ -358,9 +377,12 @@ $('.white-border-square').on("click", function () {
         updateBoard(currentPlayer);
 
         // switch to the next player
-        currentPlayer === player1 ? currentPlayer = player2 : currentPlayer = player1;
-        $('.status-container-player').toggleClass("active-player");
-        $('.current-phase').text("Draw Card");
+        if(playerSwitchOk) {
+            currentPlayer === player1 ? currentPlayer = player2 : currentPlayer = player1;
+            $('.status-container-player').toggleClass("active-player");
+            $('.current-phase').text("Draw Card");
+        }
+        
     }
     else {
         console.log("Wrong Square!");

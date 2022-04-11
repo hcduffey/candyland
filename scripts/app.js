@@ -314,13 +314,6 @@ function isCorrectSquare(clickedSquare, boardState, drawnColor, player) {
     return true;
 }
 
-let foundSecretPath = function(player) {
-    console.log("You found the secret path!");
-    player.currentLocation = 41;
-    updateBoard(player);
-    drawUnlocked = true;
-}
-
 // Kick off game
 let drawUnlocked = true;
 let squareClickUnlocked = false;

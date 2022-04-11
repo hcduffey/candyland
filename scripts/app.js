@@ -362,4 +362,17 @@ $('.white-border-square').on("click", function () {
         $('.status-container-player').toggleClass("active-player");
         $('.current-phase').text("Draw Card");
     }
+    else {
+        console.log("Wrong Square!");
+        
+        $(`#${$(this).attr("id")}`).removeClass("white-border-square");
+        $(`#${$(this).attr("id")}`).addClass("wrong-square");
+
+        let removeClassFunction = function (squareId) {
+            $(`#${squareId}`).removeClass("wrong-square");
+            $(`#${$(this).attr("id")}`).addClass("white-border-square");
+        };
+
+        setTimeout(removeClassFunction, 500, $(this).attr("id"));
+    }
 });

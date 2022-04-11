@@ -106,6 +106,10 @@ td {
     border: 1px grey solid;
 }
 
+.wrong-square {
+    border: 15px red solid;
+}
+
 .castle-square {
     padding: 2px 1px;
 }

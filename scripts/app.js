@@ -10,7 +10,7 @@ class Player {
 
         this.token = token;
 
-        this.currentDirection = this.directions.up;
+        this.currentDirection = this.directions.up; 
         this.currentLocation = 121;
         this.playerNumber = playerNumber;
     }

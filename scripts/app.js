@@ -184,18 +184,18 @@ function createSecretPath() {
 
 function createCandyCaneForest() {
     
-    $("#16").html("<img class='token' src='../images/candy-cane.png' alt='candycane'>");
-    $("#17").html("<img class='token' src='../images/candy-cane.png' alt='candycane'>");
-    $("#18").html("<img class='token' src='../images/candy-cane.png' alt='candycane'>");
-    $("#19").html("<img class='token' src='../images/candy-cane.png' alt='candycane'>");
+    $("#16").html("<img class='token' src='images/candy-cane.png' alt='candycane'>");
+    $("#17").html("<img class='token' src='images/candy-cane.png' alt='candycane'>");
+    $("#18").html("<img class='token' src='images/candy-cane.png' alt='candycane'>");
+    $("#19").html("<img class='token' src='images/candy-cane.png' alt='candycane'>");
 
-    $("#31").html("<img class='token' src='../images/candy-cane.png' alt='candycane'>");
-    $("#46").html("<img class='token' src='../images/candy-cane.png' alt='candycane'>");
+    $("#31").html("<img class='token' src='images/candy-cane.png' alt='candycane'>");
+    $("#46").html("<img class='token' src='images/candy-cane.png' alt='candycane'>");
 }
 
 function addCastle() {
     $("#14").addClass("castle-square");
-    $("#14").html("<img class='castle-token' src='../images/castle.png' alt='castle'>");
+    $("#14").html("<img class='castle-token' src='images/castle.png' alt='castle'>");
 }
 
 /**

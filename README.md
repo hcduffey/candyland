@@ -1,12 +1,123 @@
-# Candyland
+<div id="top"></div>
+<!--
+*** Thanks for checking out the Best-README-Template. If you have a suggestion
+*** that would make this better, please fork the repo and create a pull request
+*** or simply open an issue with the tag "enhancement".
+*** Don't forget to give the project a star!
+*** Thanks again! Now go create something AMAZING! :D
+-->
 
-## Project Overview
 
-A simple browser-based version of the Candyland game. Candyland is a classic board game that was first published in 1949. Its aim is to provide a fun game that young children can play without knowing how to count or read.
 
+<!-- PROJECT SHIELDS -->
+<!--
+*** I'm using markdown "reference style" links for readability.
+*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
+*** See the bottom of this document for the declaration of the reference variables
+*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
+*** https://www.markdownguide.org/basic-syntax/#reference-style-links
+-->
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
+
+
+
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/hcduffey/candyland">
+    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  </a>
+
+<h3 align="center">Candyland</h3>
+
+  <p align="center">
+    A simple browser-based game
+    <br />
+    <a href="https://github.com/hcduffey/candyland"><strong>Explore the code »</strong></a>
+    <br />
+    <br />
+    <a href="https://hcduffey.github.io/candyland/">View Demo</a>
+    ·
+    <a href="https://github.com/hcduffey/candyland/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/hcduffey/candyland/issues">Request Feature</a>
+  </p>
+</div>
+
+
+
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
+  </ol>
+</details>
+
+
+
+<!-- ABOUT THE PROJECT -->
+## About The Project
+
+[![Product Name Screen Shot][product-screenshot]](images/screen_shot.png)
+
+Candyland is a classic board game that was first published in 1949. Its aim is to provide a fun game that young children can play without knowing how to count or read.
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+### Built With
+
+* [W3CSS](https://www.w3schools.com/w3css/)
+* [JQuery](https://jquery.com)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+<!-- GETTING STARTED -->
 ## Getting Started
 
-The game can be accessed at https://hcduffey.github.io/candyland/.
+To get a local copy up and running follow these simple steps.
+
+### Prerequisites
+
+There are no prerequisites.
+
+### Installation
+
+1. Clone the repo
+   ```sh
+   git clone https://github.com/hcduffey/candyland.git
+   ```
+2. Open index.html in your browser
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+
+<!-- USAGE EXAMPLES -->
+## Usage
 
 The page loads with the game ready to play and set to Player 1's turn. Moves are made by first clicking the "Draw" button to draw a card. That player then clicks the nearest gameboard square to their game piece that matches the color of the square on the drawn card. The first player to make it to the end of the board wins.
 
@@ -20,69 +131,84 @@ If a player lands on the purple square nearest Gum Drop Pass, their game piece a
 
 The first player to reach the Candy Castle at the end of the board wins the game. Note: the Candy Castle square can be any color.
 
-## Screenshots
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-_Main Screen_
-![image](images/screen_shot.png)
 
-_Found the Secret Path_
-![image](images/screen_shot_secret.png)
 
-_Won the Game_
-![image](images/screen_shot_win.png)
+<!-- ROADMAP -->
+## Roadmap
 
-## Technologies Used
+- [ ] Create an "Licorice Square" that causes the player to lose a turn if they land on it
+- [ ] Add double-square cards that enable players to move to the second square of that color instead of the first
+- [ ] Make the interface responsive so that it can be played on smaller screens
 
-- HTML
-- CSS (W3CSS Framework)
-- Javascript (JQuery)
+See the [open issues](https://github.com/github_username/repo_name/issues) for a full list of proposed features (and known issues).
 
-## Install
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-The game can also be installed locally:
 
-1. Clone the source from Github
-2. View index.html in a browser
 
-## Next Steps
+<!-- CONTRIBUTING -->
+## Contributing
 
-Planned future enhancements include:
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
-- Create an "Licorice Square" that causes the player to lose a turn if they land on it
-- Add double-square cards that enable players to move to the second square of that color instead of the first
-- Make the interface responsive so that it can be played on smaller screens
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+Don't forget to give the project a star! Thanks again!
 
-***
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-## Wireframes
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-_Main Screen Wireframe_
-![image](images/Candyland-Wireframe_main.jpg)
 
-## User Stories
 
-1. As a user, I want to be able to start a new game at any time.
+<!-- LICENSE -->
+## License
 
-2. As a user, I want to play a turn by drawing a card and moving my game piece to the next corresponding color square.
+Distributed under the MIT License. See `LICENSE.txt` for more information.
 
-3. As a user, I want my opponent to play a turn after me.
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-4. As a user, I want to see a celebratory message when I win the game by reaching the final square.
 
-### MVP Goals
 
-1. As a user, I want start a new game by clicking a New button. This will bring all player pieces back to Start.
+<!-- CONTACT -->
+## Contact
 
-2. As a user, I want to play a turn by clicking a Draw button to have my game piece moved to the corresponing color square on the card.
+Your Name - [@cliffduffey2](https://twitter.com/cliffduffey2)
 
-3. As a user, I want to play against a friend in 2 player mode.
+Project Link: [https://github.com/hcduffey/candyland](https://github.com/hcduffey/candyland)
 
-4. As a user I want to win the game by landing on the Star Square at the end of the board (which will be reached by any color).
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-### Stretch Goals
 
-1. As a user, I want to be required to correctly choose the square indicated by the card before my game piece is moved to it.
 
-2. As a user, I want to have a chance to draw "double square" cards that allow me to move to the second square of that color.
+<!-- ACKNOWLEDGMENTS -->
+## Acknowledgments
 
-3. As a user, I want the possibility of landing on a "Licourice Space" that makes the player stuck for one turn to make the game more exciting.
+* []()
+* []()
+* []()
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[contributors-shield]: https://img.shields.io/github/contributors/hcduffey/candyland.svg?style=for-the-badge
+[contributors-url]: https://github.com/hcduffey/candyland/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/hcduffey/candyland.svg?style=for-the-badge
+[forks-url]: https://github.com/hcduffey/candyland/network/members
+[stars-shield]: https://img.shields.io/github/stars/hcduffey/candyland.svg?style=for-the-badge
+[stars-url]: https://github.com/hcduffey/candyland/stargazers
+[issues-shield]: https://img.shields.io/github/issues/hcduffey/candyland.svg?style=for-the-badge
+[issues-url]: https://github.com/hcduffey/candyland/issues
+[license-shield]: https://img.shields.io/github/license/hcduffey/candyland.svg?style=for-the-badge
+[license-url]: https://github.com/hcduffey/candyland/blob/master/LICENSE.txt
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://linkedin.com/in/cduffey
+[product-screenshot]: images/screen_shot.png

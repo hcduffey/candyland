@@ -178,7 +178,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@cliffduffey2](https://twitter.com/cliffduffey2)
+Cliff Duffey - [@cliffduffey2](https://twitter.com/cliffduffey2)
 
 Project Link: [https://github.com/hcduffey/candyland](https://github.com/hcduffey/candyland)
 
@@ -189,9 +189,8 @@ Project Link: [https://github.com/hcduffey/candyland](https://github.com/hcduffe
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-* []()
-* []()
-* []()
+* [Pixabay Images](https://pixabay.com/)
+* [Google Fonts](https://fonts.google.com/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 

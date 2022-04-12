@@ -142,7 +142,7 @@ The first player to reach the Candy Castle at the end of the board wins the game
 - [ ] Add double-square cards that enable players to move to the second square of that color instead of the first
 - [ ] Make the interface responsive so that it can be played on smaller screens
 
-See the [open issues](https://github.com/github_username/repo_name/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/hcduffey/candyland/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 

@@ -163,6 +163,8 @@ td {
 
 .card-hidden {
     background-color: green;
+    background-image: url("../images/card-pattern.jpg");
+    background-size: contain;
 }
 
 .card-square {

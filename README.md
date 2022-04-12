@@ -2,19 +2,32 @@
 
 ## Project Overview
 
-A simple browser-based version of the Candyland game. Candlyland is a classic board game was first published in 1949. Its aim is to provide a fun game for young children can play without knowing how to count. Moves are made by clicking a "Draw" button to draw a card that indicates the color square the player moves to. The first player to make it to the end of the board wins.
+A simple browser-based version of the Candyland game. Candlyland is a classic board game that was first published in 1949. Its aim is to provide a fun game that young children can play without knowing how to count.
 
 ## Getting Started
 
-The page loads with the game ready to play, and set to Player 1's turn. Each player completes a turn by clicking the 'Draw' button to draw a clard, then clicks the next square that matches the color of the drawn card.
+The page loads with the game ready to play and set to Player 1's turn. Moves are made by clicking a "Draw" button to draw a card. That player then clicks the nearest gameboard square to their game piece that matches the color of the square on the drawn card. The first player to make it to the end of the board wins.
+
+Click the Reset button at any time to start a new game.
 
 ### Shortcut through Gumdrop Pass
 
 If a player lands on the purple square nearest Gum Drop Pass, their game piece advances through the "shortcut" through the Pass illustrated by the dotted lined squares.
 
+### Winning the Game
+
+The first player to reach the Candy Castle at the end of the board wins the game. Note: the Candy Castle square is any color.
+
 ## Screenshots
 
+_Main Screen_
 ![image](images/screen_shot.png)
+
+_Found the Secret Path_
+![image](images/screen_shot_secret.png)
+
+_Won the Game_
+![image](images/screen_shot_win.png)
 
 ## Technologies Used
 
@@ -30,13 +43,17 @@ If a player lands on the purple square nearest Gum Drop Pass, their game piece a
 
 ## Next Steps
 
-Planned future enhancements (icebox items).
+Planned future enhancements include:
 
-# App Developement
+- Creat an "Licourice Square" that causes the player to lose a turn if the land on it
+- Allow users to customize their game token
+- Add double-square cards that enable players to move to the second square of that color instead of the first
+
+***
 
 ## Wireframes
 
-_Main Screen_
+_Main Screen Wireframe_
 ![image](images/Candyland-Wireframe_main.jpg)
 
 ## User Stories

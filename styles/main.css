@@ -4,6 +4,7 @@ body {
     background-image: url("../images/background.png");
 }
 
+/* Put a low opacity image of a gingerbread man in the background */
 body::after {
     content: "";
     background: url("../images/player1_token.png");
@@ -114,7 +115,7 @@ td {
     padding: 2px 1px;
 }
 
-/* Styles for the card */
+/* Styles for the card and the card stack below the card */
 .card {
     z-index: 4;
     height: 180px;
@@ -169,7 +170,7 @@ td {
     width: 50px;
 }
 
-/* Player status */
+/* Player status styles */
 .status-container {
     display: flex;
     justify-content: space-evenly;

@@ -2,23 +2,23 @@
 
 ## Project Overview
 
-A simple browser-based version of the Candyland game. Candlyland is a classic board game that was first published in 1949. Its aim is to provide a fun game that young children can play without knowing how to count.
+A simple browser-based version of the Candyland game. Candyland is a classic board game that was first published in 1949. Its aim is to provide a fun game that young children can play without knowing how to count or read.
 
 ## Getting Started
 
 The game can be accessed at https://hcduffey.github.io/candyland/.
 
-The page loads with the game ready to play and set to Player 1's turn. Moves are made by clicking a "Draw" button to draw a card. That player then clicks the nearest gameboard square to their game piece that matches the color of the square on the drawn card. The first player to make it to the end of the board wins.
+The page loads with the game ready to play and set to Player 1's turn. Moves are made by first clicking the "Draw" button to draw a card. That player then clicks the nearest gameboard square to their game piece that matches the color of the square on the drawn card. The first player to make it to the end of the board wins.
 
 Click the Reset button at any time to start a new game.
 
 ### Shortcut through Gumdrop Pass
 
-If a player lands on the purple square nearest Gum Drop Pass, their game piece advances through the "shortcut" through the Pass illustrated by the dotted lined squares.
+If a player lands on the purple square nearest Gum Drop Pass, their game piece advances through the "shortcut" through the secret path illustrated by the dotted lined squares.
 
 ### Winning the Game
 
-The first player to reach the Candy Castle at the end of the board wins the game. Note: the Candy Castle square is any color.
+The first player to reach the Candy Castle at the end of the board wins the game. Note: the Candy Castle square can be any color.
 
 ## Screenshots
 
@@ -48,9 +48,9 @@ The game can also be installed locally:
 
 Planned future enhancements include:
 
-- Creat an "Licourice Square" that causes the player to lose a turn if the land on it
-- Allow users to customize their game token
+- Create an "Licorice Square" that causes the player to lose a turn if they land on it
 - Add double-square cards that enable players to move to the second square of that color instead of the first
+- Make the interface responsive so that it can be played on smaller screens
 
 ***
 

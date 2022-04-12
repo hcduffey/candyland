@@ -172,14 +172,14 @@ function createSecretPath() {
     $("#57").addClass("secret-path");
     $("#42").addClass("secret-path");
 
-    $("#27").html("<img class='gumdrop' src='../images/gumdrop.png' alt='gumdrop'>");
-    $("#28").html("<img class='gumdrop' src='../images/gumdrop.png' alt='gumdrop'>");
-    $("#43").html("<img class='gumdrop' src='../images/gumdrop.png' alt='gumdrop'>");
-    $("#44").html("<img class='gumdrop' src='../images/gumdrop.png' alt='gumdrop'>");
-    $("#55").html("<img class='gumdrop' src='../images/gumdrop.png' alt='gumdrop'>");
-    $("#56").html("<img class='gumdrop' src='../images/gumdrop.png' alt='gumdrop'>");
-    $("#58").html("<img class='gumdrop' src='../images/gumdrop.png' alt='gumdrop'>");
-    $("#71").html("<img class='gumdrop' src='../images/gumdrop.png' alt='gumdrop'>");
+    $("#27").html("<img class='gumdrop' src='./images/gumdrop.png' alt='gumdrop'>");
+    $("#28").html("<img class='gumdrop' src='./images/gumdrop.png' alt='gumdrop'>");
+    $("#43").html("<img class='gumdrop' src='./images/gumdrop.png' alt='gumdrop'>");
+    $("#44").html("<img class='gumdrop' src='./images/gumdrop.png' alt='gumdrop'>");
+    $("#55").html("<img class='gumdrop' src='./images/gumdrop.png' alt='gumdrop'>");
+    $("#56").html("<img class='gumdrop' src='./images/gumdrop.png' alt='gumdrop'>");
+    $("#58").html("<img class='gumdrop' src='./images/gumdrop.png' alt='gumdrop'>");
+    $("#71").html("<img class='gumdrop' src='./images/gumdrop.png' alt='gumdrop'>");
 }
 
 function createCandyCaneForest() {

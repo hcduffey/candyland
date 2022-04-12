@@ -127,9 +127,7 @@ function drawBoard(boardStateInput, player) {
         }
         
         if(player.currentLocation === index) {
-            console.log(player.currentLocation + " : " + index);
             tokenHTML = `<img class="token ${player.playerNumber}" src="${player.token}">`;
-            console.log(tokenHTML);
         }
 
         boardTableString += `<td><div id="${index}" class="w3-panel ${boardSquareColor} ${usableBoardSquare}">${tokenHTML}</div></td>`;
@@ -370,7 +368,6 @@ $('.white-border-square').on("click", function () {
             playerSwitchOk = false;
             $('#secret-path-modal').css("display", "block");
             setTimeout(function() {
-                console.log("You found the secret path!");
                 currentPlayer.currentLocation = 41;
                 updateBoard(currentPlayer);
                 currentPlayer === player1 ? currentPlayer = player2 : currentPlayer = player1;
@@ -398,9 +395,7 @@ $('.white-border-square').on("click", function () {
         }
         
     }
-    else { // If they click the wrong square, it will flash red to indicate that it was wrong
-        console.log("Wrong Square!");
-        
+    else { // If they click the wrong square, it will flash red to indicate that it was wrong  
         $(`#${$(this).attr("id")}`).removeClass("white-border-square");
         $(`#${$(this).attr("id")}`).addClass("wrong-square");
 

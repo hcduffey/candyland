@@ -385,6 +385,9 @@ $('.white-border-square').on("click", function () {
         drawUnlocked = true;
         squareClickUnlocked = false;
 
+        // Make the card hidden again
+        resetCard();
+
         updateBoard(currentPlayer);
 
         // switch to the next player, it wont switch to the next player until playerSwitchOk === true to address timing issue in the above setTimeout on line 358 -- otherwise, it may move the wrong player because it switched before the above code completes

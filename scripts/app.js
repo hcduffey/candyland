@@ -1,5 +1,6 @@
 // GAME STATE/MODEL
 
+// The Player class provides the state and functions for player 1 and player 2 objects. Players can move across the board, and store their location, player token image
 class Player {
     constructor(rowLength, token, playerNumber) {
         this.directions = {
@@ -56,13 +57,6 @@ const color = {
     black: "w3-black",
     empty: ""
 };
-
-const rowLength = 15;
-const board = $(".board");
-
-const player1 = new Player(rowLength, "./images/player1_token.png", "one");
-const player2 = new Player(rowLength, "./images/player2_token.png", "two");
-let currentPlayer = player1;
 
 // INITIALIZATION FUNCTIONS
 
@@ -148,16 +142,18 @@ function drawBoard(boardStateInput, player) {
     boardTableString += "</tr>";
 
     $(".board").html(boardTableString);
-    addBoardCuves();
+
+    // Add some of the visual features to make the board look nicer
+    addBoardCurves();
     createSecretPath();
     createCandyCaneForest();
     addCastle();
 }
 
 /**
- * Makes the turns in the board curvy so that the game board looks nice
+ * Makes the turns in the board curvy
  */
-function addBoardCuves() {
+function addBoardCurves() {
     $("#106").addClass("top-left");
     $("#117").addClass("bottom-right");
     $("#77").addClass("bottom-left");
@@ -166,7 +162,7 @@ function addBoardCuves() {
     $("#11").addClass("top-left");
 }
 
-// Create a secret path through gumdrop pass
+// Create a secret path through Gumdrop Pass (dotted border lined squares), and adds the gumdrop images
 function createSecretPath() {
     $("#72").addClass("secret-path");
     $("#57").addClass("secret-path");
@@ -182,6 +178,8 @@ function createSecretPath() {
     $("#71").html("<img class='gumdrop' src='images/gumdrop.png' alt='gumdrop'>");
 }
 
+
+// Adds the candy cane images to the board
 function createCandyCaneForest() {
     
     $("#16").html("<img class='token' src='images/candy-cane.png' alt='candycane'>");
@@ -193,6 +191,8 @@ function createCandyCaneForest() {
     $("#46").html("<img class='token' src='images/candy-cane.png' alt='candycane'>");
 }
 
+
+// adds the castle image to the final square on the board
 function addCastle() {
     $("#14").addClass("castle-square");
     $("#14").html("<img class='castle-token' src='images/castle.png' alt='castle'>");
@@ -208,6 +208,8 @@ function updateBoard(showPlayer2 = true) {
 
     $(`.${player2.playerNumber}`).remove();
     let tokenHTML2 = `<img class="token ${player2.playerNumber}" src="${player2.token}">`; 
+
+    // Only show player 1 token if both tokens are on the same square (it looks weird otherwise)
     if(showPlayer2 && player2.currentLocation !== player1.currentLocation) {
         $(`#${player2.currentLocation}`).append(tokenHTML2);
     }
@@ -218,6 +220,8 @@ function updateBoard(showPlayer2 = true) {
  */
 function resetCard() {
     $('.card').addClass("card-hidden");
+
+    // remove all possible colors that the interior square could be on the card
     $('.card-square').removeClass(color.blue);
     $('.card-square').removeClass(color.green);
     $('.card-square').removeClass(color.purple);
@@ -254,45 +258,11 @@ function drawCard() {
     return drawnColor;
 }
 
-// Event Handlers
-
-// When the draw button is clicked, reveal a new card. There is also a check to make sure the user is in the draw phase of their turn -- if the user isn't selecting a square to move
-$('.draw-btn').on("click", function() {
-    if(drawUnlocked) {
-        drawnColor = drawCard();
-
-        drawUnlocked = false;
-        squareClickUnlocked = true;
-
-        $('.current-phase').text("Click Square");
-    }    
-});
-
-
-/** resets the board to its initial state and restarts the game */
-$('.reset-btn').on("click", function() {
-    drawUnlocked = true;
-    squareClickUnlocked = false;
-    player1.resetLocation();
-    player2.resetLocation();
-    currentPlayer = player1;
-    resetCard();
-    addCastle();
-    $('.status-container-player1').removeClass("active-player"); // remove active from both players
-    $('.status-container-player2').removeClass("active-player");
-    $('.status-container-player1').addClass("active-player"); // add it back to player 1
-    $('.current-phase').text("Draw Card");
-    updateBoard(false);
-});
-
-/** Returns true of the user clicked the correct square that matches their drawn card, false otherwise */
+// Returns true of the user clicked the correct square that matches their drawn card, false otherwise */
 function isCorrectSquare(clickedSquare, boardState, drawnColor, player) {
 
-    /** CLOSEST SQUARE CHECK */
-    /**
-     * Create a copy of the curren player object, and progress that copies location forward until it finds a black square or the drawn color. 
-     * It then checks that found closest square of that color equals the clicked square
-     */
+    // CLOSEST SQUARE CHECK 
+    // The code simulates the players move by creating a copy of the curren player object, and progress that copies location forward until it finds a black square or the drawn color. It then checks that found closest square of that color is the same as the square clicked by the player
     const fauxPlayer = new Player(15, null);
     fauxPlayer.currentLocation = player.currentLocation;
     fauxPlayer.currentDirection = player.currentDirection;
@@ -314,19 +284,66 @@ function isCorrectSquare(clickedSquare, boardState, drawnColor, player) {
     return true;
 }
 
-// Kick off game
+// GLOBAL VARIABLES
+
+// Used to initialize the player objects, the length of the row tells the player object how many spaces to move when moving up a row
+const rowLength = 15;
+const player1 = new Player(rowLength, "./images/player1_token.png", "one");
+const player2 = new Player(rowLength, "./images/player2_token.png", "two");
+
+// Game initializes with player1 taking the first turn
+let currentPlayer = player1;
+
+// Stores the color square a player draws during their turn
+let drawnColor;
+
+// These are locks used so that the player can only draw and/or click a square when they're in that phase of their turn
 let drawUnlocked = true;
 let squareClickUnlocked = false;
+// This lock is used for timing purposes when using SetTimeOut in the code
 let playerSwitchOk = true;
 
+// This variable is used for demo purposes, it can be set to true in order to guarantee the player will land on the Gumdrop Pass square
 let cheat = false;
 
-let drawnColor;
+// INITIALIZE THE BOARD
 
 const boardState = initializeBoardState();
 drawBoard(boardState, currentPlayer);
 
-// Have to add this event handler after drawBoard because those elements don't exist until then
+// EVENT HANDLERS
+
+// When the draw button is clicked, reveal a new card. There is also a check to make sure the user is in the draw phase of their turn -- if the user isn't selecting a square to move
+$('.draw-btn').on("click", function() {
+    if(drawUnlocked) {
+        drawnColor = drawCard();
+
+        drawUnlocked = false;
+        squareClickUnlocked = true;
+
+        $('.current-phase').text("Click Square");
+    }    
+});
+
+
+// Reset Button, when clicked resets the board to its initial state and restarts the game 
+$('.reset-btn').on("click", function() {
+    drawUnlocked = true;
+    squareClickUnlocked = false;
+    player1.resetLocation();
+    player2.resetLocation();
+    currentPlayer = player1;
+    resetCard();
+    addCastle();
+    $('.status-container-player1').removeClass("active-player"); // remove active from both players
+    $('.status-container-player2').removeClass("active-player");
+    $('.status-container-player1').addClass("active-player"); // add it back to player 1
+    $('.current-phase').text("Draw Card");
+    updateBoard(false);
+});
+
+// Each board game square has this event handler to be executed whenever it is clicked
+// It will check to ensure the Player is in the square click phase of their turn, and they have clicked the correct square to progress
 $('.white-border-square').on("click", function () {
     // check if user is in the square-click phase of their turn, and that they clicked the correct square
     if(squareClickUnlocked && isCorrectSquare(parseInt($(this).attr("id")), boardState, drawnColor, currentPlayer)) {
@@ -342,6 +359,7 @@ $('.white-border-square').on("click", function () {
             }
         }
 
+        // This is for demo purposes so that I can place a token on the Gumdrop Pass secret path square
         if(cheat) {
             currentPlayer.currentLocation = 87
         }
@@ -363,12 +381,13 @@ $('.white-border-square').on("click", function () {
             }, 2500);
         }
 
+        // Go back to the draw phase
         drawUnlocked = true;
         squareClickUnlocked = false;
 
         updateBoard(currentPlayer);
 
-        // switch to the next player
+        // switch to the next player, it wont switch to the next player until playerSwitchOk === true to address timing issue in the above setTimeout on line 358 -- otherwise, it may move the wrong player because it switched before the above code completes
         if(playerSwitchOk) {
             currentPlayer === player1 ? currentPlayer = player2 : currentPlayer = player1;
             $('.status-container-player').toggleClass("active-player");
@@ -376,7 +395,7 @@ $('.white-border-square').on("click", function () {
         }
         
     }
-    else {
+    else { // If they click the wrong square, it will flash red to indicate that it was wrong
         console.log("Wrong Square!");
         
         $(`#${$(this).attr("id")}`).removeClass("white-border-square");

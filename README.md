@@ -6,6 +6,8 @@ A simple browser-based version of the Candyland game. Candlyland is a classic bo
 
 ## Getting Started
 
+The game can be accessed at https://hcduffey.github.io/candyland/.
+
 The page loads with the game ready to play and set to Player 1's turn. Moves are made by clicking a "Draw" button to draw a card. That player then clicks the nearest gameboard square to their game piece that matches the color of the square on the drawn card. The first player to make it to the end of the board wins.
 
 Click the Reset button at any time to start a new game.
@@ -37,9 +39,10 @@ _Won the Game_
 
 ## Install
 
+The game can also be installed locally:
+
 1. Clone the source from Github
-2. Run 'npm install' to download and install JQuery
-3. View index.html in a browser
+2. View index.html in a browser
 
 ## Next Steps
 

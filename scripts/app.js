@@ -14,6 +14,7 @@ class Player {
         this.currentDirection = this.directions.up;
         this.currentLocation = 121;
         this.playerNumber = playerNumber;
+        this.onLicorice = false;
     }
 
     // called when restarting a game to place token back at the beginning
@@ -144,6 +145,7 @@ function drawBoard(boardStateInput, player) {
     // Add some of the visual features to make the board look nicer
     addBoardCurves();
     createSecretPath();
+    addLicorice();
     createCandyCaneForest();
     addCastle();
 }
@@ -194,6 +196,11 @@ function createCandyCaneForest() {
 function addCastle() {
     $("#14").addClass("castle-square");
     $("#14").html("<img class='castle-token' src='images/castle.png' alt='castle'>");
+}
+
+function addLicorice() {
+    $("#82").addClass("licorice-square");
+    $("#82").html("<img class='licorice-token' src='images/licorice.png' alt='licorice'>");
 }
 
 /**
@@ -349,7 +356,9 @@ $('.white-border-square').on("click", function () {
             if(boardState[currentPlayer.currentLocation] === color.black) {
                 $("#14").html("");
                 $('.current-phase').text("Game Over!");
+
                 updateBoard(currentPlayer);
+                
                 $('#winner-modal').css("display", "block");
                 drawUnlocked = false;
                 squareClickUnlocked = false;
@@ -359,7 +368,7 @@ $('.white-border-square').on("click", function () {
 
         // This is for demo purposes so that I can place a token on the Gumdrop Pass secret path square
         if(cheat) {
-            currentPlayer.currentLocation = 87
+            currentPlayer.currentLocation = 82;
         }
 
         // Check if player lands on the secret path square
@@ -378,19 +387,41 @@ $('.white-border-square').on("click", function () {
             }, 2500);
         }
 
+        // Check if player lands on the licorice square
+        if(currentPlayer.currentLocation === 82) {
+            currentPlayer.onLicorice = true;
+            currentPlayer.currentLocation = 82;
+            currentPlayer.currentDirection = currentPlayer.directions.left;
+            $('.licorice-token').addClass('hidden');
+            $('#licorice-modal').css("display", "block");
+        }
+
         // Go back to the draw phase
         drawUnlocked = true;
         squareClickUnlocked = false;
 
         // Make the card hidden again
         resetCard();
+        
+        // If at the end of a players turn, nobody is on the licorice square, make sure it is no longer hidden
+        if(player1.currentLocation !== 82 && player2.currentLocation !== 82) {
+            $('.licorice-token').removeClass('hidden');
+        }
 
         updateBoard(currentPlayer);
-
+        
         // switch to the next player, it wont switch to the next player until playerSwitchOk === true to address timing issue in the above setTimeout on line 358 -- otherwise, it may move the wrong player because it switched before the above code completes
         if(playerSwitchOk) {
             currentPlayer === player1 ? currentPlayer = player2 : currentPlayer = player1;
-            $('.status-container-player').toggleClass("active-player");
+            if(currentPlayer.onLicorice) {
+                //Switch the player back
+                currentPlayer.onLicorice = false;
+                currentPlayer === player1 ? currentPlayer = player2 : currentPlayer = player1;
+            }
+            else {
+                $('.status-container-player').toggleClass("active-player");
+            }
+            
             $('.current-phase').text("Draw Card");
         }
         

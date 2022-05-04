@@ -210,10 +210,20 @@ h2 {
     height: 100px;
 }
 
-.token, .gumdrop, .castle-token {
+.token, .gumdrop, .castle-token, .licorice-token {
     z-index: 2;
     height: 60px;
     width: 60px;
+}
+
+.one, .two {
+    z-index: 3;
+    height: 60px;
+    width: 60px;
+}
+
+.hidden {
+    display:none;
 }
 
 /* Modal styles */
@@ -226,7 +236,7 @@ h2 {
     width: 400px;
 }
 
-#castle-winner-img {
+#castle-winner-img, #licorice-img {
     width: 100px;
 }
 

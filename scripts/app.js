@@ -255,13 +255,12 @@ function drawCard() {
             drawnColor = color.yellow;  
     }
 
-    switch(Math.ceil(Math.random()*3)) {
+    switch(Math.ceil(Math.random()*2)) {
         case 1:
-        case 2:
             $('.card').html("<div class='card-square'></div>");
             doubleSquare = false;
             break;
-        case 3:
+        case 2:
             $('.card').html("<div class='card-square'></div><div class='card-square'></div>");
             doubleSquare = true;
             break;

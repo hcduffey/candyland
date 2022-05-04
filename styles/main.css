@@ -123,7 +123,8 @@ td {
     border: black 2px solid;
     border-radius: 10px;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-around;
     align-items: center;
     background-color: white;
 }

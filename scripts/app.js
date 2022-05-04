@@ -254,12 +254,27 @@ function drawCard() {
         default:
             drawnColor = color.yellow;  
     }
+
+    switch(Math.ceil(Math.random()*3)) {
+        case 1:
+        case 2:
+            $('.card').html("<div class='card-square'></div>");
+            doubleSquare = false;
+            break;
+        case 3:
+            $('.card').html("<div class='card-square'></div><div class='card-square'></div>");
+            doubleSquare = true;
+            break;
+    }
+
     $('.card-square').removeClass(color.green);
     $('.card-square').removeClass(color.purple);
     $('.card-square').removeClass(color.blue);
     $('.card-square').removeClass(color.yellow);
-
     $('.card-square').addClass(drawnColor);
+
+
+
     return drawnColor;
 }
 
@@ -269,12 +284,19 @@ function isCorrectSquare(clickedSquare, boardState, drawnColor, player) {
     // CLOSEST SQUARE CHECK 
     // The code simulates the players move by creating a copy of the curren player object, and progress that copies location forward until it finds a black square or the drawn color. It then checks that found closest square of that color is the same as the square clicked by the player
     const fauxPlayer = new Player(15, null);
+    let fauxDoubleSquare = doubleSquare;
+
     fauxPlayer.currentLocation = player.currentLocation;
     fauxPlayer.currentDirection = player.currentDirection;
 
     let foundSquare = false;
     do {
-        foundSquare = fauxPlayer.movePlayer(boardState, drawnColor); 
+        foundSquare = fauxPlayer.movePlayer(boardState, drawnColor);
+
+        if(foundSquare && fauxDoubleSquare) {
+            foundSquare = false;
+            fauxDoubleSquare = false;
+        }
 
         // If the black square (square at the end of the board) is reached before finding a square that matches the drawn card, the player wins
         if(boardState[fauxPlayer.currentLocation] === color.black) {
@@ -295,6 +317,7 @@ function isCorrectSquare(clickedSquare, boardState, drawnColor, player) {
 const rowLength = 15;
 const player1 = new Player(rowLength, "./images/player1_token.png", "one");
 const player2 = new Player(rowLength, "./images/player2_token.png", "two");
+let doubleSquare = false;
 
 // Game initializes with player1 taking the first turn
 let currentPlayer = player1;
@@ -352,7 +375,14 @@ $('.reset-btn').on("click", function() {
 $('.white-border-square').on("click", function () {
     // check if user is in the square-click phase of their turn, and that they clicked the correct square
     if(squareClickUnlocked && isCorrectSquare(parseInt($(this).attr("id")), boardState, drawnColor, currentPlayer)) {
-        while(currentPlayer.movePlayer(boardState, drawnColor) === false) {
+        let hitFirstSquare;
+        while((hitFirstSquare = currentPlayer.movePlayer(boardState, drawnColor)) === false || doubleSquare === true) {
+            if(hitFirstSquare && doubleSquare) {
+                doubleSquare = false;
+                hitFirstSquare = false;
+                console.log("Hit first square!");
+            }
+
             if(boardState[currentPlayer.currentLocation] === color.black) {
                 $("#14").html("");
                 $('.current-phase').text("Game Over!");
